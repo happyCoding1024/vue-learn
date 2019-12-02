@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TodoList jQuery</title>
+  <script src="./jQuery.js"></script>
+</head>
+<body>
+  <div>
+    <input type="text" id="input">
+    <button id="btn">提交</button>
+    <ul id="list"></ul>
+  </div>
+
+  <script>
+    function Page() {
+    }
+
+    $.extend(Page.prototype, {
+      init() {
+        this.bindEvents()
+      },
+      bindEvents() {
+        const btn = $('#btn');
+        // proxy 用来改变 this 的指向,将 handleBtmClick 永远绑定在 Page 实例上
+        btn.on('click', $.proxy(this.handleBtnClick, this));
+        },
+      handleBtnClick() {
+        // 获取 input 框中的内容
+        const inputElem = $('#input');
+        let inputValue =  inputElem.val();
+        let ulElem = $('#list');
+        ulElem.append('<li>' + inputValue + '</li>');
+        inputElem .val('');
+      }
+      });
+
+  //  创建 Page 实例
+    const page = new Page();
+    page.init();
+  </script>
+</body>
+</html>

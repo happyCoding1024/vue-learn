@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hello world</title>
+  <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="app">{{content}}</div>
+  <script>
+    // 原生js 实现两秒之后变换内容
+    // let dom = document.getElementById('app');
+    // dom.innerHTML= "hello world";
+    // setTimeout(() => {
+    //   dom.innerHTML = "bye world";
+    // }, 2000);
+
+    // Vue.js 实现两秒之后变换内容
+    const app = new Vue({
+      el: '#app', // el 表示app实例负责管理的区域，这里表示让id为app的区域由app这个实例来管理
+      data: {
+        content: 'hello world'
+      }
+    });
+
+    setTimeout(() => {
+      app.$data.content = 'bye world'
+    }, 2000);
+
+ </script>
+</body>
+</html>
