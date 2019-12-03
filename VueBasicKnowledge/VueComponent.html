@@ -1,0 +1,39 @@
+<!--
+  vue 组件也是一个实例，组件在执行时被编译成实例运行。
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue 实例</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+  <div id="root" @click="handleClick">
+    <item></item>
+    <div></div>
+    {{message}}
+  </div>
+  <script>
+    // Vue 组件，每个 Vue 组件也是一个实例
+    Vue.component('item', {
+      template: '<div>hello world</div>'
+    });
+
+    // 根实例
+    let vm = new  Vue({
+      // 为什么 Vue 能响应 上面div的数据变化呢？就是因为下面的 el: '#root'。
+      el: "#root",
+      data: {
+        message: 'hello world'
+      },
+      methods: {
+        handleClick: function() {
+          console.log('hello');
+          alert('hello')
+        }
+      }
+    })
+  </script>
+</body>
+</html>
