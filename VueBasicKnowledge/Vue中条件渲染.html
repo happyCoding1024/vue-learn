@@ -1,0 +1,32 @@
+<!--
+  本课知识点：
+  1. v-if:"JS表达式" 如果 JS 表达式为true，那么就会创建这个DOM节点,如果为false,那么就删除这个节点
+  2. v-show："JS表达式" 如果为true，那么就会创建这个DOM节点，如果为false, 那么style="display: node"
+  3. 如果要频繁地显示隐藏元素，显然 v-show 的效率更高一些。
+  4. v-if 和 v-else 必须紧挨着使用否则就会报错。
+  5. v-if, v-else-if, v-else 也要紧挨着
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue中的条件渲染</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <!--    如果activated属性的值 isActivated 如果是true那么就有 activated类-->
+  <div v-if="show">{{message}}</div>
+  <div v-else>Bye World</div>
+</div>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      show: false,
+      message: 'hello world'
+    },
+  })
+</script>
+</body>
+</html>
