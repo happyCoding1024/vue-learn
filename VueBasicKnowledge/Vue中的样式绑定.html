@@ -1,0 +1,45 @@
+<!--
+  本课知识点：
+  1.:class="{activated: isActivated}" 说明当 isActivated 是 true 时，类名就是activated
+  2. :class="[activated]" 类名就是activated变量的值
+  3. :class="[activated, activatedOne]", 可以有多个类名
+  4. vue中见到 `:`后面跟的是指令，`:指令="JS表达式"`
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue中的样式绑定</title>
+  <script src="../vue.js"></script>
+  <style>
+    .activated {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <!--    如果activated属性的值 isActivated 如果是true那么就有 activated类-->
+  <div :style="styleObj"
+       @click="handleDivClick"
+  >
+    hello world
+  </div>
+</div>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      styleObj: {
+        color: 'black'
+      }
+    },
+    methods: {
+      handleDivClick: function() {
+        this.styleObj.color = (this.styleObj.color === 'black') ? 'red' : 'black';
+      }
+    }
+  })
+</script>
+</body>
+</html>
