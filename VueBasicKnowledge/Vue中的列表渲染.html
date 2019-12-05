@@ -1,0 +1,34 @@
+<!--
+  本课知识点：
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue中的列表渲染</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <!--    如果activated属性的值 isActivated 如果是true那么就有 activated类-->
+  <div v-if="show">{{message}}</div>
+  <div v-else>Bye World</div>
+</div>
+<script>
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      list: [
+        'hello',
+        'Dell',
+        'nice',
+        'to',
+        'meet',
+        'you'
+      ]
+    }
+  })
+</script>
+</body>
+</html>
