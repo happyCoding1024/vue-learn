@@ -11,22 +11,19 @@
 </head>
 <body>
 <div id="app">
-  <!--    如果activated属性的值 isActivated 如果是true那么就有 activated类-->
-  <div v-if="show">{{message}}</div>
-  <div v-else>Bye World</div>
+  <div v-for="(item, key, index) of userInfo" >
+    {{item}} ---- {{key}} --- {{index}}
+  </div>
 </div>
 <script>
   var vm = new Vue({
     el: "#app",
     data: {
-      list: [
-        'hello',
-        'Dell',
-        'nice',
-        'to',
-        'meet',
-        'you'
-      ]
+      userInfo: {
+        name: 'Dell',
+        age: 28,
+        gender: 'male'
+      }
     }
   })
 </script>
