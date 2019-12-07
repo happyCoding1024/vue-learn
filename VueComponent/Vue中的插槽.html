@@ -1,0 +1,37 @@
+<!--插槽可以使得父组件很方便地向子组件中插入HTML代码-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue中的插槽(slot)</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+
+  <div id="root">
+    <child>
+      <div class="header" slot="footer">come</div>
+      <div class="footer" slot="footer">on</div>
+
+    </child>
+  </div>
+  <script>
+
+    Vue.component('child', {
+      template: `
+        <div>
+          <slot name="header"></slot>
+          <slot name="footer"></slot>
+        </div>',
+      `,
+      props: {
+        content: this.content
+      }
+    });
+
+    var vm = new Vue({
+      el: '#root'
+    })
+  </script>
+</body>
+</html>
