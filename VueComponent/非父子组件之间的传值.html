@@ -3,8 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <title>非父子组件之间的传值</title>
+  <script src="../vue.js"></script>
 </head>
 <body>
+  <div id="root">
+    <child1 content="Dell"></child1>
+    <child2 content="Lee"></child2>
 
+  </div>
+
+  <script>
+    Vue.prototype.bus = new Vue;
+    Vue.component('child1', {
+      data: function() {
+        return {
+          selfContent: this.content
+        }
+      },
+      props: {
+        content: String
+      },
+      template: '<div @click="handleClick">{{selfContent}}</div>',
+      methods: {
+        handleClick: function() {
+          // 利用 this.bush 触发的原因在于所有的 Vue 实例都能够监听到
+          this.bus.$emit('change', this.selfContent);
+        }
+      },
+      mounted: function() {
+        var this_ = this;
+        this.bus.$on('change', function(msg) {
+          this_.selfContent = msg;
+        })
+      }
+    });
+
+
+    Vue.component('child2', {
+      data: function() {
+        return {
+          selfContent: this.content
+        }
+      },
+      props: {
+        content: String
+      },
+      template: '<div @click="handleClick">{{selfContent}}</div>',
+      methods: {
+        handleClick: function() {
+          // 利用 this.bush 触发的原因在于所有的 Vue 实例都能够监听到
+          this.bus.$emit('change', this.selfContent);
+        }
+      },
+      mounted: function() {
+        var this_ = this;
+        this.bus.$on('change', function(msg) {
+          this_.selfContent = msg;
+        })
+      }
+    });
+    var vm = new Vue({
+      el: '#root',
+
+    })
+  </script>
 </body>
 </html>
