@@ -9,7 +9,6 @@
   <div id="root">
     <child1 content="Dell"></child1>
     <child2 content="Lee"></child2>
-
   </div>
 
   <script>
@@ -38,7 +37,6 @@
       }
     });
 
-
     Vue.component('child2', {
       data: function() {
         return {
@@ -62,10 +60,12 @@
         })
       }
     });
+
     var vm = new Vue({
       el: '#root',
 
     })
+
   </script>
 </body>
 </html>
