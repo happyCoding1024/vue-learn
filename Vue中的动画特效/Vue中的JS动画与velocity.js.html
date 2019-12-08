@@ -1,0 +1,63 @@
+<!--
+  beforeEnter: 开始显示之前
+  Enter：开始执行动画
+  after-enter: 结束动画之后，也就是左最终的转态
+
+  velocity.js JS动画库
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue中的JS动画与velocity.js</title>
+  <script src="../vue.js"></script>
+  <script src="../velocity.min.js"></script>
+</head>
+<body>
+
+<div id="root">
+  <transition
+    name="fade"
+    @before-enter="handleBeforeEnter"
+    @enter="handleEnter"
+    @after-enter="handleAfterEnter"
+  >
+    <div v-if="show">
+      hello world
+    </div>
+  </transition>
+  <button @click="handleClick">change</button>
+</div>
+
+<script>
+  var vm = new Vue({
+    el: '#root',
+    data: {
+      show: true
+    },
+    methods: {
+      handleClick: function() {
+        this.show = !this.show;
+      },
+      handleBeforeEnter: function(el) {
+        el.style.opacity = 0;
+      },
+      handleEnter: function(el, done) {
+        Velocity(el,
+          {opacity: 1},
+          {
+            duration: 1000,
+            complete: done
+          })
+      },
+      handleAfterEnter: function(el) {
+        alert('动画结束');
+      }
+    }
+  })
+</script>
+
+</body>
+</html>
+
