@@ -1,0 +1,63 @@
+<!--
+  Vue中动画封装的作用可以使得动画可复用
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue中的动画封装</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="root">
+  <fade :show="show">
+    <div>
+      hello world
+    </div>
+  </fade>
+  <button @click="handleClick">toggle</button>
+</div>
+
+<script>
+
+  Vue.component('fade', {
+    props: ['show'],
+    template: `
+      <transition
+      @before-enter="handleBeforeEnter"
+      @enter="handleEnter"
+      >
+        <slot v-if="show"></slot>
+      </transition>
+    `,
+    methods: {
+      handleBeforeEnter(el) {
+        el.style.color = 'red';
+      },
+      handleEnter(el, done) {
+        setTimeout(() => {
+          el.style.color = 'green';
+        }, 2000);
+        setTimeout(() => {
+          done();
+        }, 4000);
+      }
+    }
+  });
+  var vm = new Vue({
+    el: '#root',
+    data: {
+      show: true
+    },
+    methods: {
+      handleClick: function() {
+        this.show = !this.show;
+      }
+    }
+  })
+</script>
+
+</body>
+</html>
