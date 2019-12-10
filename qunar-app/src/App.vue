@@ -1,6 +1,9 @@
+<!--
+ router-view 显示的当前路由地址下的内容，它会根据当前用户
+ 请求的地址，到 router下的index.js下根据路径去找到底去显示哪一个组件。
+-->
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
@@ -12,12 +15,4 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
