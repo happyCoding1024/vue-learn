@@ -13,13 +13,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .header {
+  .header
     display: flex
     background: #00bcd4
     line-height: .86em;
     color: #fff
-  }
-
     .header-left
       width: .64rem
       float: left
