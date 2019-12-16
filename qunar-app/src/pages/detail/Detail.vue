@@ -1,9 +1,14 @@
 <template>
   <div>
-    <detail-banner></detail-banner>
+    <detail-banner
+      :sightName="sightName"
+      :bannerImg="bannerImg"
+      :gallaryImgs="gallaryImgs"
+    >
+    </detail-banner>
     <detail-header></detail-header>
     <div class="content">
-      <detail-list :list="list"></detail-list>
+      <detail-list :list="categoryList"></detail-list>
     </div>
   </div>
 </template>
@@ -12,7 +17,7 @@
 import DetailBanner from './components/banner';
 import DetailHeader from './components/header';
 import DetailList from './components/list';
-
+import axios from 'axios';
 
 export default {
   name: 'Detail',
@@ -23,27 +28,34 @@ export default {
   },
   data() {
     return {
-      list: [{
-        title: '成人票',
-        children: [{
-          title: '成人三馆联票',
-          children: [{
-            title: '成人三馆联票 - 某一连锁店销售'
-          }, {
-            title: '成人三馆联票 - 某一直营店销售'
-          }]
-        }, {
-          title: '成人五馆联票'
-        }]
-      }, {
-        title: '学生票',
-      }, {
-        title: '儿童票',
-      }, {
-        title: '特惠票',
-      }]
+      categoryList: [],
+      sightName: '',
+      bannerImg: '',
+      gallaryImgs: [],
     }
   },
+  methods: {
+    getDetailInfo() {
+      // 实现在发送请求的同时将id也传给后端
+      axios.get('api/detail.json', {
+        params: {
+          id: this.$route.params.id,
+        }
+      }).then(this.getDetailInfoSucc);
+    },
+    getDetailInfoSucc(res) {
+      let res_temp = res.data.data;
+      if (res.ret) {
+        this.categoryList = res_temp.categoryList;
+        this.sightName = res_temp.sightName;
+        this.bannerImg = res_temp.bannerImg;
+        this.gallaryImgs = res_temp.gallaryImgs;
+      }
+    },
+  },
+  mounted() {
+    this.getDetailInfo();
+  }
 }
 </script>
 
